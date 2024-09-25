@@ -33,16 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Obtém os valores dos campos de entrada do formulário
         const title = document.getElementById('titulo').value;
         const date = document.getElementById('data').value;
+        const done = 'Pendente';
 
         // Verifica se o campo título está preenchido
         if (title) {
-            // Adiciona a Tarefa à lista de Tarefas
-            tarefas.push({ title, date });
-            salvarTarefas();
-            alert('Tarefa cadastrada com sucesso!');
-            // Limpa os campos do formulário
-            document.getElementById('titulo').value = '';
-            document.getElementById('data').value = '';
+            // Verifica se o campo data está preenchido
+            if (date) {
+                // Adiciona a Tarefa à lista de Tarefas
+                tarefas.push({ title, date, done });
+                salvarTarefas();
+                alert('Tarefa cadastrada com sucesso!');
+                // Limpa os campos do formulário
+                document.getElementById('titulo').value = '';
+                document.getElementById('data').value = '';
+            } else {
+                alert('Por favor, preencha a data de conclusão.');
+            }
         } else {
             alert('Por favor, preencha o título do Tarefa.');
         }
@@ -61,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <p>Título: ${tarefa.title}</p>
                     <p>Data de conclusão: ${tarefa.date}</p>
+                    <p>Data de conclusão: ${tarefa.done}</p>
                 </div>
             `;
             taskList.appendChild(listItem);
