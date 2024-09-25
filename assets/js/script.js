@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (title) {
             // Verifica se o campo data está preenchido
             if (date) {
+                
                 // Obtém a data atual
                     const today = new Date().toISOString().split('T')[0];
                     // Verifica se a data é anterior à data atual
