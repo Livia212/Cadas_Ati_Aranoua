@@ -1,11 +1,11 @@
 // Aguarda o carregamento completo do DOM antes de executar o script
 document.addEventListener('DOMContentLoaded', () => {
-    // Recupera a lista de livros do localStorage, ou inicializa uma lista vazia se não houver dados
-    let livros = JSON.parse(localStorage.getItem('livros')) || [];
+    // Recupera a lista de tarefas do localStorage, ou inicializa uma lista vazia se não houver dados
+    let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
-    // Função para salvar a lista de livros no localStorage
-    function salvarLivros() {
-        localStorage.setItem('livros', JSON.stringify(livros));
+    // Função para salvar a lista de tarefas no localStorage
+    function salvarTarefas() {
+        localStorage.setItem('tarefas', JSON.stringify(tarefas));
     }
 
     // Função para exibir um formulário específico baseado no ID fornecido
@@ -19,119 +19,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formToShow) {
             formToShow.style.display = 'block';
         }
-        // Esconde o container da lista de livros
+        // Esconde o container da lista de Tarefas
         document.getElementById('list-container').style.display = 'none';
 
-        // Se o formulário for o de apagar, exibe os livros para apagar
+        // Se o formulário for o de apagar, exibe os Tarefas para apagar
         if (formId === 'apagar') {
-            exibirLivrosParaApagar();
+            exibirTarefasParaApagar();
         }
     }
 
-    // Função para cadastrar um livro
-    function cadastrarLivro() {
+    // Função para cadastrar um Tarefa
+    function cadastrarTarefa() {
         // Obtém os valores dos campos de entrada do formulário
         const title = document.getElementById('titulo').value;
-        const author = document.getElementById('autor').value;
-        const capa = document.getElementById('capa').files[0];
+        const date = document.getElementById('data').value;
 
         // Verifica se o campo título está preenchido
         if (title) {
-            // Se houver uma capa, lê a imagem
-            if (capa) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    // Adiciona o livro com a imagem da capa à lista de livros
-                    livros.push({ title, author, capa: e.target.result });
-                    salvarLivros();
-                    alert('Livro cadastrado com sucesso!');
-                    // Limpa os campos do formulário
-                    document.getElementById('titulo').value = '';
-                    document.getElementById('autor').value = '';
-                    document.getElementById('capa').value = '';
-                };
-                reader.readAsDataURL(capa);
-            } else {
-                // Adiciona o livro sem capa à lista de livros
-                livros.push({ title, author, capa: null });
-                salvarLivros();
-                alert('Livro cadastrado com sucesso!');
-                // Limpa os campos do formulário
-                document.getElementById('titulo').value = '';
-                document.getElementById('autor').value = '';
-            }
+            // Adiciona a Tarefa à lista de Tarefas
+            tarefas.push({ title, date });
+            salvarTarefas();
+            alert('Tarefa cadastrada com sucesso!');
+            // Limpa os campos do formulário
+            document.getElementById('titulo').value = '';
+            document.getElementById('data').value = '';
         } else {
-            alert('Por favor, preencha o título do livro.');
+            alert('Por favor, preencha o título do Tarefa.');
         }
     }
 
-    // Função para consultar um livro pelo título ou autor
-    function consultarLivro() {
-        // Obtém os valores dos campos de entrada para consulta
-        const title = document.getElementById('consulta-titulo').value;
-        const author = document.getElementById('consulta-autor').value;
-        const resultContainer = document.getElementById('consulta-result');
-        resultContainer.innerHTML = '';
-
-        // Filtra a lista de livros pelo título ou autor
-        const livrosEncontrados = livros.filter(livro => {
-            return (title && livro.title.toLowerCase().includes(title.toLowerCase())) ||
-                   (author && livro.author.toLowerCase().includes(author.toLowerCase()));
-        });
-
-        // Exibe os detalhes dos livros encontrados ou uma mensagem de não encontrado
-        if (livrosEncontrados.length > 0) {
-            livrosEncontrados.forEach(livro => {
-                resultContainer.innerHTML += `
-                    <div>
-                        ${livro.capa ? `<img src="${livro.capa}" alt="Capa do Livro">` : ''}
-                        <div>
-                            <p>Título: ${livro.title}</p>
-                            <p>Autor: ${livro.author}</p>
-                        </div>
-                    </div>
-                `;
-            });
-        } else {
-            resultContainer.innerHTML = 'Livro não encontrado.';
-        }
-    }
-
-    // Função para exibir a lista de livros cadastrados
-    function showBooks() {
+    // Função para exibir a lista de Tarefas cadastrados
+    function showTasks() {
         const listContainer = document.getElementById('list-container');
-        const bookList = document.getElementById('book-list');
-        bookList.innerHTML = '';
+        const taskList = document.getElementById('task-list');
+        taskList.innerHTML = '';
 
-        // Adiciona cada livro da lista de livros ao elemento de lista na página
-        livros.forEach(livro => {
+        // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista na página
+        tarefas.forEach(tarefa => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-                ${livro.capa ? `<img src="${livro.capa}" alt="Capa do Livro" class="book-cover">` : ''}
                 <div>
-                    <p>Título: ${livro.title}</p>
-                    <p>Autor: ${livro.author}</p>
+                    <p>Título: ${tarefa.title}</p>
+                    <p>Data de conclusão: ${tarefa.date}</p>
                 </div>
             `;
-            bookList.appendChild(listItem);
+            taskList.appendChild(listItem);
         });
 
-        // Exibe o container da lista de livros
+        // Exibe o container da lista de Tarefas
         listContainer.style.display = 'block';
     }
 
-    // Função para exibir os livros a serem apagados com checkboxes
-    function exibirLivrosParaApagar() {
+    // Função para exibir os Tarefas a serem apagados com checkboxes
+    function exibirTarefasParaApagar() {
         const apagarList = document.getElementById('apagar-list');
         apagarList.innerHTML = '';
 
-        // Adiciona cada livro da lista de livros ao elemento de lista para apagar na página
-        livros.forEach((livro, index) => {
+        // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista para apagar na página
+        tarefas.forEach((tarefa, index) => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
-                ${livro.capa ? `<img src="${livro.capa}" alt="Capa do Livro" class="book-cover">` : ''}
-                <label for="apagar-${index}">${livro.title} - ${livro.author}</label>
+                <label for="apagar-${index}">${tarefa.title} - ${tarefa.date}</label>
             `;
             apagarList.appendChild(listItem);
         });
@@ -145,44 +94,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para apagar os livros selecionados
-    function apagarLivros() {
+    // Função para apagar os Tarefas selecionados
+    function apagarTarefas() {
         // Seleciona todos os checkboxes que estão marcados
         const checkboxes = document.querySelectorAll('#apagar-list input[type="checkbox"]:checked');
         if (checkboxes.length > 0) {
-            // Obtém os índices dos livros a serem apagados
+            // Obtém os índices dos Tarefas a serem apagados
             const indicesParaApagar = Array.from(checkboxes).map(checkbox => parseInt(checkbox.dataset.index));
-            // Filtra a lista de livros, removendo os livros que estão marcados para apagar
-            livros = livros.filter((_, index) => !indicesParaApagar.includes(index));
-            salvarLivros();
-            alert('Livro(s) apagado(s) com sucesso!');
-            // Atualiza a lista de livros a serem apagados
-            exibirLivrosParaApagar();
+            // Filtra a lista de Tarefas, removendo os Tarefas que estão marcados para apagar
+            tarefas = tarefas.filter((_, index) => !indicesParaApagar.includes(index));
+            salvarTarefas();
+            alert('Tarefa(s) apagado(s) com sucesso!');
+            // Atualiza a lista de Tarefas a serem apagados
+            exibirTarefasParaApagar();
         } else {
-            alert('Por favor, selecione pelo menos um livro para apagar.');
+            alert('Por favor, selecione pelo menos um Tarefa para apagar.');
         }
     }
 
     // Adiciona eventos aos botões do menu
     document.getElementById('btn-cadastrar').addEventListener('click', () => showForm('cadastrar'));
-    document.getElementById('btn-consultar').addEventListener('click', () => showForm('consultar'));
 
-    // Recarrega a página ao clicar em "Listar Livros" para exibir a lista de livros
+    // Recarrega a página ao clicar em "Listar Tarefas" para exibir a lista de Tarefas
     document.getElementById('btn-listar').addEventListener('click', () => {
-        localStorage.setItem('listBooks', 'true');
+        localStorage.setItem('listTasks', 'true');
         location.reload();
     });
 
     document.getElementById('btn-apagar').addEventListener('click', () => showForm('apagar'));
 
     // Adiciona eventos aos botões de submissão dos formulários
-    document.getElementById('btn-submit-cadastrar').addEventListener('click', cadastrarLivro);
-    document.getElementById('btn-submit-consultar').addEventListener('click', consultarLivro);
-    document.getElementById('btn-submit-apagar').addEventListener('click', apagarLivros);
+    document.getElementById('btn-submit-cadastrar').addEventListener('click', cadastrarTarefa);
+    document.getElementById('btn-submit-apagar').addEventListener('click', apagarTarefas);
 
-    // Verifica se a página foi recarregada para listar os livros
-    if (localStorage.getItem('listBooks') === 'true') {
-        showBooks();
-        localStorage.removeItem('listBooks');
+    // Verifica se a página foi recarregada para listar os Tarefas
+    if (localStorage.getItem('listTasks') === 'true') {
+        showTasks();
+        localStorage.removeItem('listTasks');
     }
 });
