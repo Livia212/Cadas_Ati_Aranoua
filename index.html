@@ -11,6 +11,7 @@
     <div id="menu">
         <button id="btn-cadastrar">Cadastrar Tarefa</button>
         <button id="btn-listar">Listar Tarefas</button>
+        <button id="btn-editar">Editar Tarefas</button>
         <button id="btn-apagar">Apagar Tarefa(s)</button>
     </div>
 
@@ -27,6 +28,15 @@
     <div id="list-container" class="form-container">
         <h2>Lista de Tarefas</h2>
         <ul id="task-list"></ul>
+    </div>
+
+    <div id="form-editar" class="form-container">
+        <h2>Editar Tarefa</h2>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required><br>
+        <label for="data">Data de conclusão:</label>
+        <input type="date" id="data" required><br>
+        <button id="btn-submit-editar">Atualizar</button>
     </div>
 
     <div id="form-apagar" class="form-container">

@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Obtém os valores dos campos de entrada do formulário
         const title = document.getElementById('titulo').value;
         const date = document.getElementById('data').value;
+        // Define o status da Tarefa como pendente por padrão
         const done = 'Pendente';
 
         // Verifica se o campo título está preenchido
         if (title) {
             // Verifica se o campo data está preenchido
             if (date) {
-                
                 // Obtém a data atual
                     const today = new Date().toISOString().split('T')[0];
                     // Verifica se a data é anterior à data atual
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adiciona eventos aos botões do menu
     document.getElementById('btn-cadastrar').addEventListener('click', () => showForm('cadastrar'));
+    document.getElementById('btn-editar').addEventListener('click', () => showForm('editar'));
 
     // Recarrega a página ao clicar em "Listar Tarefas" para exibir a lista de Tarefas
     document.getElementById('btn-listar').addEventListener('click', () => {
