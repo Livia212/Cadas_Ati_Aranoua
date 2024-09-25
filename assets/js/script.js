@@ -49,6 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 alert('Por favor, preencha a data de conclusão.');
             }
+                if (!date) {
+                    // Obtém a data atual
+                    const today = new Date().toISOString().split('T')[0];
+                    // Verifica se a data é anterior à data atual
+                    if (date < today) {
+                        alert('A data deve ser a partir de hoje.');
+                        return; // Encerra a função se a data for anterior a hoje
+                    }
+                }
         } else {
             alert('Por favor, preencha o título do Tarefa.');
         }
