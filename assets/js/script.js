@@ -78,7 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Data de conclusão: ${tarefa.done}</p>
                 </div>
             `;
+            // Adicionando botão de editar para cada tarefa
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Editar';
+            editButton.className = "btn-editar";
+            editButton.addEventListener('click', () => formEditarTarefa(tarefa));
+            listItem.appendChild(editButton);
+
             taskList.appendChild(listItem);
+
         });
 
         // Exibe o container da lista de Tarefas
@@ -95,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
-                <label for="apagar-${index}">${tarefa.title} - ${tarefa.date}</label>
+                <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done} ${index}</label>
             `;
             apagarList.appendChild(listItem);
         });
@@ -127,9 +135,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Formulário para editar tarefas
+    function formEditarTarefa(tarefa) {
+        showForm('editar');
+        document.getElementById('btn-submit-editar').addEventListener('click', () => editarTarefa(tarefa));
+    }
+    
+    // Função para editar um Tarefa
+    function editarTarefa(tarefa) {
+        // Obtém os valores dos campos de entrada do formulário
+        const title = document.getElementById('titulo-editar').value;
+        const date = document.getElementById('data-editar').value;
+
+        // Verifica se o campo título está preenchido
+        if (title) {
+            // Verifica se o campo data está preenchido
+            if (date) {
+                // Obtém a data atual
+                    const today = new Date().toISOString().split('T')[0];
+                    // Verifica se a data é anterior à data atual
+                    if (date < today) {
+                        alert('A data deve ser a partir de hoje.');
+                        return; // Encerra a função se a data for anterior a hoje
+                    }
+                // Adiciona a Tarefa à lista de Tarefas
+                console.log('tarefa: ', tarefa);
+                tarefa.title = title;
+                tarefa.date = date;
+                salvarTarefas();
+                alert('Tarefa editada com sucesso!');
+                // Limpa os campos do formulário
+                document.getElementById('titulo').value = '';
+                document.getElementById('data').value = '';
+            } else {
+                alert('Por favor, preencha a data de conclusão.');
+            }
+        } else {
+            alert('Por favor, preencha o título do Tarefa.');
+        }
+    }  
+
     // Adiciona eventos aos botões do menu
     document.getElementById('btn-cadastrar').addEventListener('click', () => showForm('cadastrar'));
-    document.getElementById('btn-editar').addEventListener('click', () => showForm('editar'));
 
     // Recarrega a página ao clicar em "Listar Tarefas" para exibir a lista de Tarefas
     document.getElementById('btn-listar').addEventListener('click', () => {
@@ -142,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona eventos aos botões de submissão dos formulários
     document.getElementById('btn-submit-cadastrar').addEventListener('click', cadastrarTarefa);
     document.getElementById('btn-submit-apagar').addEventListener('click', apagarTarefas);
+    
 
     // Verifica se a página foi recarregada para listar os Tarefas
     if (localStorage.getItem('listTasks') === 'true') {
