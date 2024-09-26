@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <p>Título: ${tarefa.title}</p>
                     <p>Data de conclusão: ${tarefa.date}</p>
-                    <p>Data de conclusão: ${tarefa.done}</p>
+                    <p>Estado: ${tarefa.done}</p>
                 </div>
             `;
             // Adicionando botão de editar para cada tarefa
