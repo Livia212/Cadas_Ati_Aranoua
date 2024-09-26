@@ -85,6 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
             editButton.addEventListener('click', () => formEditarTarefa(tarefa));
             listItem.appendChild(editButton);
 
+            // Adicionando botão de concluir para cada tarefa
+            const doneButton = document.createElement('button');
+            if (tarefa.done === 'Pendente') {
+                doneButton.innerText = 'Concluído';
+            } else {
+                doneButton.innerText = 'Pendente';
+            }
+            doneButton.className = "btn-done";
+            doneButton.addEventListener('click', () => mudarDoneTarefa(tarefa));
+            listItem.appendChild(doneButton);
+
             taskList.appendChild(listItem);
 
         });
@@ -103,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
-                <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done} ${index}</label>
+                <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done}</label>
             `;
             apagarList.appendChild(listItem);
         });
@@ -174,6 +185,21 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Por favor, preencha o título do Tarefa.');
         }
     }  
+
+    // Função para mudar o estado de done
+    function mudarDoneTarefa(tarefa) {
+        console.log(tarefa.done);
+        // Muda o estado de done da Tarefa
+        if (tarefa.done === 'Pendente') {
+            tarefa.done = 'Concluído';
+        } else {
+            tarefa.done = 'Pendente';
+        }
+        // Salva as tarefas
+        salvarTarefas();
+        // Atualiza as tarefas
+        showTasks();
+    }
 
     // Adiciona eventos aos botões do menu
     document.getElementById('btn-cadastrar').addEventListener('click', () => showForm('cadastrar'));
