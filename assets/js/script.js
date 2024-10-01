@@ -133,7 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Seleciona todos os checkboxes que estão marcados
         const checkboxes = document.querySelectorAll('#apagar-list input[type="checkbox"]:checked');
         if (checkboxes.length > 0) {
-            // Obtém os índices dos Tarefas a serem apagados
+            // Caixa de confirmação para apagar doc
+            const confirmar = confirm("Você tem certeza que deseja apagar a(s) tarefa(s) selecionada(s)?")
+            
+            if (confirmar){
+                // Obtém os índices dos Tarefas a serem apagados
             const indicesParaApagar = Array.from(checkboxes).map(checkbox => parseInt(checkbox.dataset.index));
             // Filtra a lista de Tarefas, removendo os Tarefas que estão marcados para apagar
             tarefas = tarefas.filter((_, index) => !indicesParaApagar.includes(index));
@@ -141,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Tarefa(s) apagado(s) com sucesso!');
             // Atualiza a lista de Tarefas a serem apagados
             exibirTarefasParaApagar();
+            }
+            
         } else {
             alert('Por favor, selecione pelo menos um Tarefa para apagar.');
         }
