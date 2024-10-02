@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('titulo').value;
         const date = document.getElementById('data').value;
 
+        const create = new Date();
+        const edited = create.toLocaleDateString('pt-BR');
+
         // Define o status da Tarefa como pendente por padrão
         const done = 'Pendente';
 
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const formattedDate = taskDate.toLocaleDateString('pt-BR');
 
                 // Adiciona a Tarefa à lista de Tarefas
-                tarefas.push({ title, date: formattedDate, done });
+                tarefas.push({ title, date: formattedDate, done, edited });
                 salvarTarefas();
                 alert('Tarefa cadastrada com sucesso!');
 
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Título: ${tarefa.title}</p>
                     <p>Data de conclusão: ${tarefa.date}</p>
                     <p>Estado: ${tarefa.done}</p>
+                    <p>Edidato em: ${tarefa.edited}</p>
                 </div>
             `;
             // Adicionando botão de editar para cada tarefa
@@ -185,10 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert('A data deve ser a partir de hoje.');
                         return; // Encerra a função se a data for anterior a hoje
                     }
+
+                    // Converte a data para o formato brasileiro
+                    const taskDate = new Date(date + 'T00:00:00'); // Adiciona 'T00:00:00' para evitar problemas de fuso horário
+                    const formattedDate = taskDate.toLocaleDateString('pt-BR');
+
                 // Adiciona a Tarefa à lista de Tarefas
                 console.log('tarefa: ', tarefa);
                 tarefa.title = title;
-                tarefa.date = date;
+                tarefa.date = formattedDate;
+                const todayEdit = new Date();
+                tarefa.edited = todayEdit.toLocaleDateString('pt-BR');
                 salvarTarefas();
                 alert('Tarefa editada com sucesso!');
                 // Limpa os campos do formulário
