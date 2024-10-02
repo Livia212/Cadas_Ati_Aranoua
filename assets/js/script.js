@@ -76,12 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Função para exibir a lista de Tarefas cadastrados
-    function showTasks() {
+    function showTasks(filter = '') {
         const listContainer = document.getElementById('list-container');
         const taskList = document.getElementById('task-list');
         taskList.innerHTML = '';
 
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista na página
+        tarefas.filter(tarefa => filtro === '' || tarefa.done,toLowerCase() === filtro)
         tarefas.forEach(tarefa => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
@@ -101,13 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Adicionando botão de concluir para cada tarefa
             const doneButton = document.createElement('button');
-            if (tarefa.done === 'Pendente') {
-                doneButton.innerText = 'Concluído';
-            } else {
-                doneButton.innerText = 'Pendente';
-            }
-            doneButton.className = "btn-done";
+            doneButton.innerText = tarefa.done === 'Pendente' ? 'Concluido' : 'Pendente';
             doneButton.addEventListener('click', () => mudarDoneTarefa(tarefa));
+            //if (tarefa.done === 'Pendente') {
+                //doneButton.innerText = 'Concluído';
+            //} else {
+                //doneButton.innerText = 'Pendente';
+            //}
+            //doneButton.className = "btn-done";
+            //doneButton.addEventListener('click', () => mudarDoneTarefa(tarefa));
             listItem.appendChild(doneButton);
 
             taskList.appendChild(listItem);
@@ -116,6 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Exibe o container da lista de Tarefas
         listContainer.style.display = 'block';
+    }
+
+    function mudarDoneTarefa(tarefa) {
+        tarefa.done = tarefa.done === 'Pendente' ? 'Concluido' : 'Pendente';
+        salvarTarefas();
+        showTasks();
     }
 
     // Função para exibir os Tarefas a serem apagados com checkboxes
@@ -243,9 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-apagar').addEventListener('click', () => showForm('apagar'));
 
     // Adiciona eventos aos botões de submissão dos formulários
+    document.getElementById('btn-submit-cadastrar').addEventListener('click', () => showForm('cadastrar'));
+    document.getElementById('btn-listar').addEventListener('click', () => showTasks());
     document.getElementById('btn-submit-cadastrar').addEventListener('click', cadastrarTarefa);
-    document.getElementById('btn-submit-apagar').addEventListener('click', apagarTarefas);
-    
+
+    document.getElementById('filter-button').addEventListener('click', () => {
+        const filterOptions = document.getElementById('filter-options');
+        filterOptions.style.display = filterOptions.style.display === 'none' ? 'block' : 'none';
 
     // Verifica se a página foi recarregada para listar os Tarefas
     if (localStorage.getItem('listTasks') === 'true') {
