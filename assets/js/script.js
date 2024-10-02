@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Esconde todos os formulários
         forms.forEach(form => form.style.display = 'none');
         // Mostra o formulário específico baseado no ID
-        const formToShow = document.getElementById(`form-${formId}`);
+        const formToShow = document.getElementById(form-${formId});
         if (formToShow) {
             formToShow.style.display = 'block';
         }
@@ -81,23 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskList = document.getElementById('task-list');
         taskList.innerHTML = '';
 
+
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista na página
         tarefas.forEach(tarefa => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `
+            listItem.innerHTML = 
                 <div>
                     <p>Título: ${tarefa.title}</p>
                     <p>Data de conclusão: ${tarefa.date}</p>
                     <p>Estado: ${tarefa.done}</p>
                     <p>Edidato em: ${tarefa.edited}</p>
                 </div>
-            `;
-            // Adicionando botão de editar para cada tarefa
-            const editButton = document.createElement('button');
-            editButton.innerText = 'Editar';
-            editButton.className = "btn-editar";
-            editButton.addEventListener('click', () => formEditarTarefa(tarefa));
-            listItem.appendChild(editButton);
+            ;
+            taskList.appendChild(listItem);
+        });   
+    }
 
             // Adicionando botão de concluir para cada tarefa
             const doneButton = document.createElement('button');
@@ -126,10 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista para apagar na página
         tarefas.forEach((tarefa, index) => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = `
+            listItem.innerHTML = 
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
                 <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done}</label>
-            `;
+            ;
             apagarList.appendChild(listItem);
         });
 
@@ -252,4 +250,4 @@ document.addEventListener('DOMContentLoaded', () => {
         showTasks();
         localStorage.removeItem('listTasks');
     }
-});
+}); 
