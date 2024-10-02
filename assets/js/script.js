@@ -202,9 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 tarefa.edited = todayEdit.toLocaleDateString('pt-BR');
                 salvarTarefas();
                 alert('Tarefa editada com sucesso!');
+                showForm('listar');
+                showTasks();
                 // Limpa os campos do formulário
                 document.getElementById('titulo').value = '';
                 document.getElementById('data').value = '';
+
             } else {
                 alert('Por favor, preencha a data de conclusão.');
             }
