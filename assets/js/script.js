@@ -30,27 +30,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para cadastrar um Tarefa
     function cadastrarTarefa() {
+
         // Obtém os valores dos campos de entrada do formulário
         const title = document.getElementById('titulo').value;
         const date = document.getElementById('data').value;
+
         // Define o status da Tarefa como pendente por padrão
         const done = 'Pendente';
 
         // Verifica se o campo título está preenchido
         if (title) {
+
             // Verifica se o campo data está preenchido
             if (date) {
+
                 // Obtém a data atual
                     const today = new Date().toISOString().split('T')[0];
+
                     // Verifica se a data é anterior à data atual
                     if (date < today) {
                         alert('A data deve ser a partir de hoje.');
                         return; // Encerra a função se a data for anterior a hoje
                     }
+                    // Converte a data para o formato brasileiro
+                    const taskDate = new Date(date + 'T00:00:00'); // Adiciona 'T00:00:00' para evitar problemas de fuso horário
+                    const formattedDate = taskDate.toLocaleDateString('pt-BR');
+
                 // Adiciona a Tarefa à lista de Tarefas
-                tarefas.push({ title, date, done });
+                tarefas.push({ title, date: formattedDate, done });
                 salvarTarefas();
                 alert('Tarefa cadastrada com sucesso!');
+
                 // Limpa os campos do formulário
                 document.getElementById('titulo').value = '';
                 document.getElementById('data').value = '';
