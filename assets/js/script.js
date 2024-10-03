@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Esconde todos os formulários
         forms.forEach(form => form.style.display = 'none');
         // Mostra o formulário específico baseado no ID
-        const formToShow = document.getElementById(form-${formId});
+        const formToShow = document.getElementById(`form-${formId}`);
         if (formToShow) {
             formToShow.style.display = 'block';
         }
@@ -81,21 +81,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskList = document.getElementById('task-list');
         taskList.innerHTML = '';
 
-
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista na página
         tarefas.forEach(tarefa => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = 
+            listItem.innerHTML = `
                 <div>
                     <p>Título: ${tarefa.title}</p>
                     <p>Data de conclusão: ${tarefa.date}</p>
                     <p>Estado: ${tarefa.done}</p>
                     <p>Edidato em: ${tarefa.edited}</p>
                 </div>
-            ;
-            taskList.appendChild(listItem);
-        });   
-    }
+            `;
+            // Adicionando botão de editar para cada tarefa
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Editar';
+            editButton.className = "btn-editar";
+            editButton.addEventListener('click', () => formEditarTarefa(tarefa));
+            listItem.appendChild(editButton);
 
             // Adicionando botão de concluir para cada tarefa
             const doneButton = document.createElement('button');
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Exibe o container da lista de Tarefas
         listContainer.style.display = 'block';
- 
+    }
 
     // Função para exibir os Tarefas a serem apagados com checkboxes
     function exibirTarefasParaApagar() {
@@ -124,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista para apagar na página
         tarefas.forEach((tarefa, index) => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = ` 
+            listItem.innerHTML = `
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
                 <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done}</label>
             `;
@@ -147,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkboxes.length > 0) {
             // Caixa de confirmação para apagar doc
             const confirmar = confirm("Você tem certeza que deseja apagar a(s) tarefa(s) selecionada(s)?")
-            
+
             if (confirmar){
                 // Obtém os índices dos Tarefas a serem apagados
             const indicesParaApagar = Array.from(checkboxes).map(checkbox => parseInt(checkbox.dataset.index));
@@ -158,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Atualiza a lista de Tarefas a serem apagados
             exibirTarefasParaApagar();
             }
-            
+
         } else {
             alert('Por favor, selecione pelo menos um Tarefa para apagar.');
         }
@@ -169,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showForm('editar');
         document.getElementById('btn-submit-editar').addEventListener('click', () => editarTarefa(tarefa));
     }
-    
+
     // Função para editar um Tarefa
     function editarTarefa(tarefa) {
         // Obtém os valores dos campos de entrada do formulário
@@ -250,4 +252,4 @@ document.addEventListener('DOMContentLoaded', () => {
         showTasks();
         localStorage.removeItem('listTasks');
     }
-
+});
