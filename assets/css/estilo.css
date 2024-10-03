@@ -1,7 +1,7 @@
-/* Define a aparencia geral da pagina */
+/* Define a aparência geral da página */
 body {
   font-family: Arial, sans-serif;
-  text-align: center; /* Centraliza o conteudo da pagina */
+  text-align: center; /* Centraliza o conteúdo da página */
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -14,6 +14,7 @@ h1 {
   padding: 10px 0;
   margin: 0 0 20px;
 }
+
 /* Estiliza o menu de navegação */
 #menu {
   margin-bottom: 20px;
@@ -29,18 +30,20 @@ h1 {
   cursor: pointer;
   border-radius: 12px; /* Adiciona cantos arredondados */
 }
-
-#menu button:hover {
+/* altera cor dos botões ao passar o mouse */
+button:hover {
   background-color: #555;
 }
 
 /* Estiliza os campos de entrada de texto */
 input[type="text"],
-input[type="file"] {
+input[type="file"],
+input[type="date"] {
   padding: 10px;
   margin: 5px 0;
   width: 80%; /* Define a largura dos campos */
   border-radius: 15px; /* Adiciona cantos arredondados */
+  border: 1px solid #ddd;
 }
 
 /* Estiliza o botão de submissão */
@@ -54,47 +57,55 @@ button {
   border-radius: 12px; /* Adiciona cantos arredondados */
 }
 
-button:hover {
-  background-color: #555;
+/* Estiliza as listas */
+ul {
+  list-style-type: none; /* Remove marcadores de lista */
+  padding-left: 0; /* Remove padding padrão */
 }
 
-/* Estiliza a lista de livros */
-#book-list,
-#apagar-list {
-  list-style-type: none;
-  padding: 0;
+/* Estiliza os itens da lista */
+ul #task-list li,
+ul #apagar-list li {
+  border: 2px solid #ddd;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  text-align: left; /* Alinha o texto à esquerda */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Faz os itens da lista ocuparem todo o espaço dentro disponível. Aumenta quando necessário */
+ul #task-list li div,
+ul #apagar-list li div {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+/* Estiliza os botões dentro dos itens da lista */
+ul #task-list li button,
+ul #apagar-list li button {
+  margin-left: 10px;
 }
 
 /* Estiliza os containers de formulário */
 .form-container {
   display: none; /* Esconde os formulários inicialmente */
   margin-bottom: 20px;
-}
-
-/* Estiliza os itens da lista */
-#book-list li,
-#apagar-list li {
-  background-color: white;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-/* Estiliza a capa do livro */
-.book-cover {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
+  text-align: center;
+  align-items: start;
 }
 
-/* Estiliza o container de resultados da consulta */
-#consulta-result div {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: white;
+/* Centraliza o texto do inpu dentro do container */
+.form-container input {
+  text-align: center;
 }
 
 /* Centraliza o conteúdo dentro dos containers */
@@ -104,4 +115,141 @@ button:hover {
   margin: 0 auto;
   width: 80%;
   text-align: center; /* Centraliza o texto dentro dos containers */
+}
+/* Define a aparência geral da página */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Estiliza o cabeçalho */
+h1 {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  margin: 0 0 20px;
+}
+
+/* Estiliza o menu de navegação */
+#menu {
+  margin-bottom: 20px;
+}
+
+/* Estiliza os botões do menu */
+#menu button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+/*botões mudam de cor ao passar o mouse*/
+button:hover {
+  background-color: #8a8a8a;
+}
+
+/* Estiliza os campos de entrada de texto */
+input[type="text"],
+input[type="file"] {
+  width: 100%; /* Ajusta a largura para 100% do container */
+  max-width: 300px; /* Define uma largura máxima */
+  margin: 5px 0; /*define uma largura máxima */
+  border-radius: 15px;
+  border: 1px solid #ddd;
+}
+input[type="date"] {
+  width: 150px;
+}
+
+/* Estiliza o botão de submissão */
+button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+/* Estiliza as listas */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Estiliza os itens da lista */
+ul#task-list li,
+ul#apagar-list li {
+  border: 2px solid #ddd;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul#task-list li div,
+ul#apagar-list li div {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+/* Estiliza os botões dentro dos itens da lista */
+ul#task-list li button,
+ul#apagar-list li button {
+  margin-left: 10px;
+}
+
+/* Estiliza os containers de formulário */
+.form-container {
+  display: none;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Centraliza o conteúdo dentro dos containers */
+.form-container,
+#list-container,
+#consulta-result {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 600px; /* Ajusta a largura máxima para melhor visualização em desktop */
+  text-align: center;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 600px) {
+  #menu button {
+    width: 100%;
+    margin: 5px 0; /* Ajusta o espaçamento entre os botões no menu */
+  }
+
+  ul#task-list li,
+  ul#apagar-list li {
+    flex-direction: column; /* Empilha os itens verticalmente em telas menores */
+    text-align: center; /* Centraliza o texto dentro dos itens da lista */
+  }
+
+  ul#task-list li div,
+  ul#apagar-list li div {
+    margin-right: 0; /* Remove a margem direita nos itens da lista */
+  }
+
+  input[type="text"],
+  input[type="file"],
+  input[type="date"] {
+    width: 100%; /* Ajusta a largura para 100% do container em telas menores */
+  }
 }
