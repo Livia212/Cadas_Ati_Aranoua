@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Exibe o container da lista de Tarefas
         listContainer.style.display = 'block';
-    }
+ 
 
     // Função para exibir os Tarefas a serem apagados com checkboxes
     function exibirTarefasParaApagar() {
@@ -124,10 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista para apagar na página
         tarefas.forEach((tarefa, index) => {
             const listItem = document.createElement('li');
-            listItem.innerHTML = 
+            listItem.innerHTML = ` 
                 <input type="checkbox" id="apagar-${index}" data-index="${index}">
                 <label for="apagar-${index}">${tarefa.title} - ${tarefa.date} ${tarefa.done}</label>
-            ;
+            `;
             apagarList.appendChild(listItem);
         });
 
@@ -250,4 +250,4 @@ document.addEventListener('DOMContentLoaded', () => {
         showTasks();
         localStorage.removeItem('listTasks');
     }
-}); 
+
