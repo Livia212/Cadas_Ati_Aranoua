@@ -79,19 +79,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function showTasks() {
         const listContainer = document.getElementById('list-container');
         const taskList = document.getElementById('task-list');
+        const filterStatus = document.getElementById('filter-status').value; // Obtém o valor do filtro
         taskList.innerHTML = '';
 
-        // Adiciona cada Tarefa da lista de Tarefas ao elemento de lista na página
-        tarefas.forEach(tarefa => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `
-                <div>
-                    <p>Título: ${tarefa.title}</p>
-                    <p>Data de conclusão: ${tarefa.date}</p>
-                    <p>Estado: ${tarefa.done}</p>
-                    <p>Edidato em: ${tarefa.edited}</p>
-                </div>
-            `;
+        // Filtra as tarefas com base no status selecionado
+    const filteredTasks = tarefas.filter(tarefa => {
+        if (filterStatus === 'pendente') {
+            return tarefa.done === 'Pendente';
+        } else if (filterStatus === 'concluido') {
+            return tarefa.done === 'Concluído';
+        } else {
+            return true; // Se a opção for "Todos", retorna todas as tarefas
+        }
+    });
+
+        // Adiciona cada Tarefa filtrada ao elemento de lista na página
+    filteredTasks.forEach(tarefa => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <div>
+                <p>Título: ${tarefa.title}</p>
+                <p>Data de conclusão: ${tarefa.date}</p>
+                <p>Estado: ${tarefa.done}</p>
+                <p>Editado em: ${tarefa.edited}</p>
+            </div>
+        `;
             // Adicionando botão de editar para cada tarefa
             const editButton = document.createElement('button');
             editButton.innerText = 'Editar';
@@ -101,22 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Adicionando botão de concluir para cada tarefa
             const doneButton = document.createElement('button');
-            if (tarefa.done === 'Pendente') {
-                doneButton.innerText = 'Concluído';
-            } else {
-                doneButton.innerText = 'Pendente';
-            }
+            doneButton.innerText = tarefa.done === 'Pendente' ? 'Concluído' : 'Pendente';
             doneButton.className = "btn-done";
             doneButton.addEventListener('click', () => mudarDoneTarefa(tarefa));
             listItem.appendChild(doneButton);
 
             taskList.appendChild(listItem);
-
         });
 
         // Exibe o container da lista de Tarefas
         listContainer.style.display = 'block';
     }
+    // Adiciona evento ao seletor de filtro para atualizar a lista ao mudar o valor
+    document.getElementById('filter-status').addEventListener('change', showTasks);
+
 
     // Função para exibir os Tarefas a serem apagados com checkboxes
     function exibirTarefasParaApagar() {

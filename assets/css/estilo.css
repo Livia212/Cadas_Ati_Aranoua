@@ -116,10 +116,35 @@ ul#apagar-list li button {
   text-align: center;
 }
 
-/* Centralize the inputs within the form container */
+
 #form-cadastrar {
   align-items: center; /* Centraliza os inputs */
 }
 
+/* Filtro */
+#filter-status {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Adiciona um efeito ao passar o mouse no filtro */
+#filter-status:hover {
+  border-color: #333;
+}
+
+/* Estilo adicional para o filtro em dispositivos menores */
+@media (max-width: 600px) {
+  #filter-status {
+    width: 100%;
+    font-size: 14px;
+  }
+}
 
 

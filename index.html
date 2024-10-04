@@ -30,6 +30,13 @@
 
     <div id="list-container" class="form-container">
         <h2>Lista de Tarefas</h2>
+         <!-- Adicionando o seletor de filtro -->
+        <label for="filter-status">Filtro:</label>
+        <select id="filter-status">
+            <option value="todos">Todos</option>
+            <option value="pendente">Pendentes</option>
+            <option value="concluido">Concluídas</option>
+        </select>
         <ul id="task-list"></ul>
 
     </div>
