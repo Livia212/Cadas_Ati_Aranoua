@@ -1,5 +1,6 @@
 // Aguarda o carregamento completo do DOM antes de executar o script
 document.addEventListener('DOMContentLoaded', () => {
+    
     // Recupera a lista de tarefas do localStorage, ou inicializa uma lista vazia se não houver dados
     let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
@@ -10,10 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para exibir um formulário específico baseado no ID fornecido
     function showForm(formId) {
+
         // Seleciona todos os formulários
         const forms = document.querySelectorAll('.form-container');
+
         // Esconde todos os formulários
         forms.forEach(form => form.style.display = 'none');
+
         // Mostra o formulário específico baseado no ID
         const formToShow = document.getElementById(`form-${formId}`);
         if (formToShow) {
@@ -152,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filter-status').addEventListener('change', showTasks);
     document.getElementById('search-task').addEventListener('input', showTasks);
 
+
+    
     // Função para exibir os Tarefas a serem apagados com checkboxes
     function exibirTarefasParaApagar() {
         const apagarList = document.getElementById('apagar-list');
@@ -169,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const selectAllCheckbox = document.getElementById('select-all');
         selectAllCheckbox.checked = false;
+
         // Adiciona um evento para selecionar ou desmarcar todos os checkboxes
         selectAllCheckbox.addEventListener('change', () => {
             const checkboxes = document.querySelectorAll('#apagar-list input[type="checkbox"]');
@@ -178,19 +185,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para apagar os Tarefas selecionados
     function apagarTarefas() {
+
         // Seleciona todos os checkboxes que estão marcados
         const checkboxes = document.querySelectorAll('#apagar-list input[type="checkbox"]:checked');
         if (checkboxes.length > 0) {
+
             // Caixa de confirmação para apagar doc
             const confirmar = confirm("Você tem certeza que deseja apagar a(s) tarefa(s) selecionada(s)?")
 
             if (confirmar){
+
                 // Obtém os índices dos Tarefas a serem apagados
             const indicesParaApagar = Array.from(checkboxes).map(checkbox => parseInt(checkbox.dataset.index));
+            
             // Filtra a lista de Tarefas, removendo os Tarefas que estão marcados para apagar
             tarefas = tarefas.filter((_, index) => !indicesParaApagar.includes(index));
             salvarTarefas();
             alert('Tarefa(s) apagado(s) com sucesso!');
+
             // Atualiza a lista de Tarefas a serem apagados
             exibirTarefasParaApagar();
             }
