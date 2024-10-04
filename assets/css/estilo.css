@@ -40,7 +40,7 @@ button:hover {
 input[type="text"],
 input[type="file"] {
   width: 100%; /* Ajusta a largura para 100% do container */
-  max-width: 300px; /* Define uma largura máxima */
+  max-width: 250px; /* Define uma largura máxima */
   margin: 5px 0; /*define uma largura máxima */
   border-radius: 8px;
   height: 30px;
@@ -115,3 +115,11 @@ ul#apagar-list li button {
   max-width: 600px; /* Ajusta a largura máxima para melhor visualização em desktop */
   text-align: center;
 }
+
+/* Centralize the inputs within the form container */
+#form-cadastrar {
+  align-items: center; /* Centraliza os inputs */
+}
+
+
+

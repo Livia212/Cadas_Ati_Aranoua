@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } else {
-            alert('Por favor, selecione pelo menos um Tarefa para apagar.');
+            alert('Por favor, selecione pelo menos uma Tarefa para apagar.');
         }
     }
 
