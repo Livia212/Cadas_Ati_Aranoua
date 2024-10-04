@@ -1,124 +1,6 @@
 /* Define a aparência geral da página */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center; /* Centraliza o conteúdo da página */
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-/* Estiliza o cabeçalho */
-h1 {
-  background-color: #333;
-  color: white;
-  padding: 10px 0;
-  margin: 0 0 20px;
-}
-
-/* Estiliza o menu de navegação */
-#menu {
-  margin-bottom: 20px;
-}
-
-/* Estiliza os botões do menu */
-#menu button {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 12px; /* Adiciona cantos arredondados */
-}
-/* altera cor dos botões ao passar o mouse */
-button:hover {
-  background-color: #555;
-}
-
-/* Estiliza os campos de entrada de texto */
-input[type="text"],
-input[type="file"],
-input[type="date"] {
-  padding: 10px;
-  margin: 5px 0;
-  width: 80%; /* Define a largura dos campos */
-  border-radius: 15px; /* Adiciona cantos arredondados */
-  border: 1px solid #ddd;
-}
-
-/* Estiliza o botão de submissão */
-button {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 10px 0;
-  cursor: pointer;
-  border-radius: 12px; /* Adiciona cantos arredondados */
-}
-
-/* Estiliza as listas */
-ul {
-  list-style-type: none; /* Remove marcadores de lista */
-  padding-left: 0; /* Remove padding padrão */
-}
-
-/* Estiliza os itens da lista */
-ul #task-list li,
-ul #apagar-list li {
-  border: 2px solid #ddd;
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  text-align: left; /* Alinha o texto à esquerda */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Faz os itens da lista ocuparem todo o espaço dentro disponível. Aumenta quando necessário */
-ul #task-list li div,
-ul #apagar-list li div {
-  flex-grow: 1;
-  margin-right: 20px;
-}
-
-/* Estiliza os botões dentro dos itens da lista */
-ul #task-list li button,
-ul #apagar-list li button {
-  margin-left: 10px;
-}
-
-/* Estiliza os containers de formulário */
-.form-container {
-  display: none; /* Esconde os formulários inicialmente */
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100px;
-  text-align: center;
-  align-items: start;
-}
-
-/* Centraliza o texto do inpu dentro do container */
-.form-container input {
-  text-align: center;
-}
-
-/* Centraliza o conteúdo dentro dos containers */
-.form-container,
-#list-container,
-#consulta-result {
-  margin: 0 auto;
-  width: 80%;
-  text-align: center; /* Centraliza o texto dentro dos containers */
-}
-/* Define a aparência geral da página */
-body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -159,11 +41,12 @@ input[type="file"] {
   width: 100%; /* Ajusta a largura para 100% do container */
   max-width: 300px; /* Define uma largura máxima */
   margin: 5px 0; /*define uma largura máxima */
-  border-radius: 15px;
-  border: 1px solid #ddd;
+  border-radius: 8px;
 }
+/* Estiliza o campo da data*/
 input[type="date"] {
   width: 150px;
+  border-radius: 8px;
 }
 
 /* Estiliza o botão de submissão */
