@@ -75,23 +75,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função para mostrar ou ocultar a barra de pesquisa ao clicar na lupa
+    document.getElementById('btn-search').addEventListener('click', () => {
+        const searchTaskInput = document.getElementById('search-task');
+        searchTaskInput.classList.toggle('show');
+        searchTaskInput.classList.toggle('hidden');
+    
+        // Coloca o foco na barra de pesquisa quando ela é exibida
+        if (searchTaskInput.classList.contains('show')) {
+            searchTaskInput.focus();
+        }   
+        event.stopPropagation(); // 
+    });
+
+    // Ocultar a barra de pesquisa ao clicar em qualquer lugar da tela
+    document.addEventListener('click', (event) => {
+        const searchTaskInput = document.getElementById('search-task');
+        const btnSearch = document.getElementById('btn-search');
+
+        // Verifica se o clique foi fora do ícone da lupa e da barra de pesquisa
+        if (!btnSearch.contains(event.target) && !searchTaskInput.contains(event.target)) {
+            searchTaskInput.classList.add('hidden');
+            searchTaskInput.classList.remove('show');
+        }
+});
+
+
+
     // Função para exibir a lista de Tarefas cadastrados
     function showTasks() {
         const listContainer = document.getElementById('list-container');
         const taskList = document.getElementById('task-list');
         const filterStatus = document.getElementById('filter-status').value; // Obtém o valor do filtro
+        const searchText = document.getElementById('search-task').value.toLowerCase(); // Obtém o texto da barra de pesquisa e converte para minúsculas
         taskList.innerHTML = '';
 
-        // Filtra as tarefas com base no status selecionado
-    const filteredTasks = tarefas.filter(tarefa => {
-        if (filterStatus === 'pendente') {
-            return tarefa.done === 'Pendente';
-        } else if (filterStatus === 'concluido') {
-            return tarefa.done === 'Concluído';
-        } else {
-            return true; // Se a opção for "Todos", retorna todas as tarefas
-        }
-    });
+        // Filtra com base no status e no que pesquisou
+        const filteredTasks = tarefas.filter(tarefa => {
+            const matchesStatus = filterStatus === 'todos' || tarefa.done.toLowerCase() === filterStatus;
+            const matchesSearch = tarefa.title.toLowerCase().includes(searchText);
+            return matchesStatus && matchesSearch;
+        });
 
         // Adiciona cada Tarefa filtrada ao elemento de lista na página
     filteredTasks.forEach(tarefa => {
@@ -126,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Adiciona evento ao seletor de filtro para atualizar a lista ao mudar o valor
     document.getElementById('filter-status').addEventListener('change', showTasks);
-
+    document.getElementById('search-task').addEventListener('input', showTasks);
 
     // Função para exibir os Tarefas a serem apagados com checkboxes
     function exibirTarefasParaApagar() {

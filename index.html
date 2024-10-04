@@ -30,13 +30,22 @@
 
     <div id="list-container" class="form-container">
         <h2>Lista de Tarefas</h2>
-         <!-- Adicionando o seletor de filtro -->
-        <label for="filter-status">Filtro:</label>
-        <select id="filter-status">
-            <option value="todos">Todos</option>
-            <option value="pendente">Pendentes</option>
-            <option value="concluido">Concluídas</option>
-        </select>
+        <!-- Contêiner para o filtro e o ícone da lupa para poder mexer no alinhamento deles-->
+        <div class="filter-container">
+            <!-- Filtro -->
+            <label for="filter-status">filtro:</label>
+            <select id="filter-status">
+                <option value="todos">Todos</option>
+                <option value="pendente">Pendentes</option>
+                <option value="concluido">Concluídas</option>
+            </select>
+        
+        <!-- Botão da lupa -->
+        <div id="btn-search" class="icone lupa"></div>
+
+    <!-- Barra de pesquisa oculta inicialmente -->
+    <input type="text" id="search-task" placeholder="Digite o título da tarefa" class="hidden">
+
         <ul id="task-list"></ul>
 
     </div>
