@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Obtém a data atual
                     const today = new Date().toISOString().split('T')[0];
 
+                    // Verifica se a data tem tamanho válido
+                    if (date.length!== 10) {
+                        alert('A data deve estar no formato dd/mm/aaaa.');
+                        return; // Encerra a função se a data não tiver o formato válido
+                    }
+                    
                     // Verifica se a data é anterior à data atual
                     if (date < today) {
                         alert('A data deve ser a partir de hoje.');
