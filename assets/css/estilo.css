@@ -80,7 +80,6 @@ ul#apagar-list li {
   border-radius: 8px;
   text-align: left;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -116,15 +115,18 @@ ul#apagar-list li button {
   text-align: center;
 }
 
-
 #form-cadastrar {
   align-items: center; /* Centraliza os inputs */
 }
 
-
+/*Form Apagar. Alinhar texto*/
+body #form-apagar #apagar-list li label {
+  align-items: start;
+  text-align: le;
+}
 
 /* Filtro de status e a barra de pesquisa */
-#filter-status{
+#filter-status {
   width: 90px;
   padding: 1px;
   border: 1px solid #ddd;
@@ -188,7 +190,8 @@ ul#apagar-list li button {
 
 /* Responsividade da barra de pesquisa */
 @media (max-width: 600px) {
-  #filter-status, #search-task {
+  #filter-status,
+  #search-task {
     width: 100%;
     font-size: 14px;
   }
