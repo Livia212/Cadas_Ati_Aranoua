@@ -242,6 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         return; // Encerra a função se a data for anterior a hoje
                     }
 
+                    // Verifica se a data tem tamanho válido
+                    if (date.length!== 10) {
+                        alert('A data deve estar no formato dd/mm/aaaa.');
+                        return; // Encerra a função se a data não tiver o formato válido
+                    }
+
                     // Converte a data para o formato brasileiro
                     const taskDate = new Date(date + 'T00:00:00'); // Adiciona 'T00:00:00' para evitar problemas de fuso horário
                     const formattedDate = taskDate.toLocaleDateString('pt-BR');
